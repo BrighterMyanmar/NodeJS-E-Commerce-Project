@@ -1,0 +1,24 @@
+[
+   {
+      "_id": "624ac35e3965ff87d208dff1",
+      "name": "Manager",
+      "email": "manager@gmail.com",
+      "phone": "09200200200",
+      "password": "$2a$10$zEAm7dmQdZq7We8/sGVVwe13mjyH2sHYpLeHfneIBQubKmvR5P0AC",
+      "roles": [],
+      "permits": [],
+      "created": "2022-04-04T10:07:26.790Z",
+      "__v": 0
+   },
+   {
+      "_id": "624ac35e3965ff87d208dff0",
+      "name": "Owner",
+      "email": "owner@gmail.com",
+      "phone": "09100100100",
+      "password": "$2a$10$8biNWW4dijZa.N3PBjNXy.h7kXG7nUr8pIRi5NoeMflJcj/aZl2MG",
+      "roles": [],
+      "permits": [],
+      "created": "2022-04-04T10:07:26.726Z",
+      "__v": 0
+   }
+]

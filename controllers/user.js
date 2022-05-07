@@ -16,7 +16,7 @@ const register = async (req, res, next) => {
       return;
    }
 
-   req.body.dbPhoneUser = Helper.encode(req.body.password);
+   req.body.password = Helper.encode(req.body.password);
    let result = await new DB(req.body).save();
    Helper.fMsg(res, "Register Success", result);
 }

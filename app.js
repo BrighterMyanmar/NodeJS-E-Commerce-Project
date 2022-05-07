@@ -1,20 +1,27 @@
 require('dotenv').config();
 const express = require('express'),
    app = express(),
-   mongoose = require('mongoose');
+   mongoose = require('mongoose'),
+   fileupload = require('express-fileupload');
 
 mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DbName}`);
 
 app.use(express.json());
-
+app.use(fileupload());
 
 const permitRouter = require('./routes/permit');
 const roleRouter = require('./routes/role');
 const userRouter = require('./routes/user');
+const catRoute = require('./routes/category');
+const subcatRoute = require('./routes/subcat');
+
+const { validateToken, validateRole } = require('./utils/validator');
 
 app.use('/permits', permitRouter);
-app.use('/roles', roleRouter);
+app.use('/roles', validateToken(), validateRole("Owner"), roleRouter);
 app.use('/users', userRouter);
+app.use('/cats', catRoute);
+app.use('/subcats', subcatRoute);
 
 app.use((err, req, res, next) => {
    err.status = err.status || 500;

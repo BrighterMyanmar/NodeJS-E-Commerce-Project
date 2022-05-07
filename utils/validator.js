@@ -32,16 +32,20 @@ module.exports = {
          }
          let token = req.headers.authorization.split(" ")[1];
          if (token) {
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
-            if (decoded) {
-               let user = await Helper.get(decoded._id);
-               if (user) {
-                  req.user = user;
-                  next();
+            try {
+               let decoded = jwt.verify(token, process.env.SECRET_KEY);
+               if (decoded) {
+                  let user = await Helper.get(decoded._id);
+                  if (user) {
+                     req.user = user;
+                     next();
+                  } else {
+                     next(new Error("Tokenization Error"));
+                  }
                } else {
                   next(new Error("Tokenization Error"));
                }
-            } else {
+            } catch (error) {
                next(new Error("Tokenization Error"));
             }
          } else {
@@ -57,6 +61,34 @@ module.exports = {
          } else {
             next(new Error("You don't have this permission"));
          }
+      }
+   },
+   hasAnyRole: (roles) => {
+      return async (req, res, next) => {
+         let bol = false;
+         for (let i = 0; i < roles.length; i++) {
+            let hasRole = req.user.roles.find(ro => ro.name === roles[i]);
+            if (hasRole) {
+               bol = true;
+               break;
+            }
+         }
+         if (bol) next();
+         else next(new Error("You don't have enough role!"));
+      }
+   },
+   hasAnyPermit: (permits) => {
+      return (req, res, next) => {
+         let bol = false;
+         for (let i = 0; i < permits.length; i++) {
+            let hasPermit = req.user.permits.find(pm => pm.name === permits[i]);
+            if (hasPermit) {
+               bol = true;
+               break;
+            }
+         }
+         if (bol) next();
+         else next(new Error("You don't have that permission"));
       }
    }
 }

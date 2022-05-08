@@ -2,7 +2,13 @@ const DB = require('../models/category');
 const Helper = require('../utils/helper');
 
 const all = async (req, res, next) => {
-   let result = await DB.find().populate('subcats');
+   let result = await DB.find().populate({
+      path: "subcats",
+      populate: {
+         path: 'childcats',
+         model: 'childcat'
+      }
+   });
    Helper.fMsg(res, "All Categories", result);
 }
 const add = async (req, res, next) => {

@@ -14,6 +14,10 @@ const roleRouter = require('./routes/role');
 const userRouter = require('./routes/user');
 const catRoute = require('./routes/category');
 const subcatRoute = require('./routes/subcat');
+const childCatRoute = require('./routes/childcat');
+const tagRoute = require('./routes/tag');
+const deliveryRoute = require('./routes/delivery');
+const warrantyRoute = require('./routes/warranty');
 
 const { validateToken, validateRole } = require('./utils/validator');
 
@@ -22,6 +26,10 @@ app.use('/roles', validateToken(), validateRole("Owner"), roleRouter);
 app.use('/users', userRouter);
 app.use('/cats', catRoute);
 app.use('/subcats', subcatRoute);
+app.use('/childcats', childCatRoute);
+app.use('/tags', tagRoute);
+app.use('/delivery', deliveryRoute);
+app.use('/warranty', warrantyRoute);
 
 app.use((err, req, res, next) => {
    err.status = err.status || 500;

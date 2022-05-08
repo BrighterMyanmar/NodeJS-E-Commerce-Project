@@ -3,7 +3,7 @@ const CatDB = require('../models/category');
 const Helper = require('../utils/helper');
 
 const all = async (req, res) => {
-   let result = await DB.find();
+   let result = await DB.find().populate('childcats');
    Helper.fMsg(res, "All Sub Categories", result);
 }
 const get = async (req, res, next) => {

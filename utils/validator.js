@@ -33,6 +33,14 @@ module.exports = {
          let token = req.headers.authorization.split(" ")[1];
          if (token) {
             try {
+               // let decoded = jwt.decode(token,process.env.SECRET_KEY);
+               // console.log(Date.now());
+               // console.log("Decoded",decoded);
+               // if(Date.now() >= decoded.exp * 1000){
+               //    console.log("Token Expired");
+               // }else{
+               //    console.log("Token is active");
+               // }
                let decoded = jwt.verify(token, process.env.SECRET_KEY);
                if (decoded) {
                   let user = await Helper.get(decoded._id);

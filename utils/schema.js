@@ -26,6 +26,13 @@ module.exports = {
          name: Joi.string().required()
       })
    },
+   TagSchema: {
+      add: Joi.object({
+         name: Joi.string().required(),
+         image: Joi.string().required(),
+         age:Joi.optional()
+      })
+   },
    RoleSchema: {
       addPermit: Joi.object({
          roleId: Joi.string().regex(/^[0-9a-fA-f]{24}$/),

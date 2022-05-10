@@ -35,7 +35,8 @@ module.exports = {
             try {
 
                // let decoded = jwt.decode(token,process.env.SECRET_KEY);
-               // console.log(Date.now());
+               // console.log(Date.now()); 
+               // next(new Error("Token Expired"));
                // console.log(decoded);
                // if(Date.now()  >= decoded.exp * 1000){
                //    console.log("Expired");

@@ -35,7 +35,7 @@ app.use('/users', userRouter);
 app.use('/cats', catRoute);
 app.use('/subcats', subcatRoute);
 app.use('/childcats', childCatRoute);
-app.use('/tags', tagRoute);
+app.use('/tags', validateToken(), validateRole("Owner"), tagRoute);
 app.use('/delivery', deliveryRoute);
 app.use('/warranty', warrantyRoute);
 app.use('/products', productRouter);

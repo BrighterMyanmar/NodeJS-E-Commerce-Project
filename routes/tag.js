@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const controller = require('../controllers/tag');
 const { saveSingleFile } = require('../utils/gallery');
+const { validateBody } = require('../utils/validator');
+const { TagSchema } = require('../utils/schema');
 
 
-router.post('/', saveSingleFile, controller.add)
+router.post('/', saveSingleFile, validateBody(TagSchema.add), controller.add)
 router.get('/', controller.all)
 
 router.route('/:id')
